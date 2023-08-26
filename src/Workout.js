@@ -2,10 +2,11 @@ import React from "react";
 
 const Workout = ({ workout }) => {
   return (
-    <div className="px-8 py-2 m-16 bg-gray-200 border-2 border-black rounded-2xl text-black font-mono">
-      <h3 className="text-black text-center text-xl pt-1 font-bold">
+    <div className="w-5/6 px-4 sm:px-8 py-2 m-16 bg-gray-200 border-2 border-black rounded-2xl text-black font-mono mx-auto">
+      <h3 className="text-black text-center text-base sm:text-xl pt-1 font-bold">
         {workout.name}
       </h3>
+      <div className="text-xs sm:text-base">
       <p className="pt-2">
         <span className="font-bold">Type:</span>{" "}
         {workout.type.charAt(0).toUpperCase() + workout.type.slice(1)}{" "}
@@ -34,6 +35,7 @@ const Workout = ({ workout }) => {
             )
         )}
       </ol>
+    </div>
     </div>
   );
 };

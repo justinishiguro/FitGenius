@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "react-query";
-import Home from "./Pages/Home";
-import Workouts from "./Pages/Workouts";
-import Calories from "./Pages/Calories";
+import Home from "./Home";
+import Workouts from "./Workouts";
+import Calories from "./Calories";
 
 const queryClient = new QueryClient();
 

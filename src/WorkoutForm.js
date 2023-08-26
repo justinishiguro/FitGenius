@@ -1,58 +1,35 @@
-import { useState } from "react";
-import React from "react";
-import CalorieItem from "./CalorieItem";
+import React, { useState, useEffect } from "react";
+import Workout from "./Workout";
 
-function Calories() {
+const WorkoutForm = () => {
   const [name, setName] = useState("");
   const [type, setType] = useState("");
   const [muscle, setMuscle] = useState("");
+  const [difficulty, setDifficulty] = useState("");
   const [workouts, setWorkouts] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   const [show, setShow] = useState(true);
   const [fetchedOnce, setFetchOnce] = useState(false);
-
-  const handleNameChange = (e) => {
-    setName(e.target.value);
-  };
-
-  const handleTypeChange = (e) => {
-    setType(e.target.value);
-  };
-
-  const handleMuscleChange = (e) => {
-    setMuscle(e.target.value);
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    fetchWorkouts();
-    setShow(!show);
-    setFetchOnce(true);
-  };
-
-  function handleClick() {
-    setShow(!show);
-  }
-
-  const [isLoading, setIsLoading] = useState(false);
 
   const fetchWorkouts = async () => {
     setIsLoading(true);
 
     const apiKey = process.env.REACT_APP_API_KEY;
 
-    console.log(apiKey)
-
-    let url = "https://api.api-ninjas.com/v1/caloriesburned?";
+    let url = "https://api.api-ninjas.com/v1/exercises?";
 
     if (name) {
-      url += `activity=${name}&`;
+      url += `name=${name}&`;
     }
     if (type) {
-      url += `weight=${type}&`;
+      url += `type=${type}&`;
     }
     if (muscle) {
-      url += `duration=${muscle}&`;
+      url += `muscle=${muscle}&`;
+    }
+    if (difficulty) {
+      url += `difficulty=${difficulty}&`;
     }
 
     try {
@@ -75,6 +52,33 @@ function Calories() {
     }
   };
 
+  const handleNameChange = (e) => {
+    setName(e.target.value);
+  };
+
+  const handleTypeChange = (e) => {
+    setType(e.target.value);
+  };
+
+  const handleMuscleChange = (e) => {
+    setMuscle(e.target.value);
+  };
+
+  const handleDifficultyChange = (e) => {
+    setDifficulty(e.target.value);
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    fetchWorkouts();
+    setShow(!show);
+    setFetchOnce(true);
+  };
+
+  function handleClick() {
+    setShow(!show);
+  }
+
   return show ? (
     <>
       <div className="flex justify-end">
@@ -82,60 +86,108 @@ function Calories() {
           className="border-2 border-black sm:text-base text-xs sm:px-8 px-4 py-2 bg-gray-500 hover:bg-black text-white m-4 font-mono rounded-lg"
           onClick={handleClick}
         >
-          Back To Activity
+          Back To Workout
         </button>
       </div>
+
       <div className="flex justify-center items-center fixed bottom-1/6 left-0 right-0 h-5/6">
-        <div className="w-5/6 max-w-lg py-4 px-32 rounded-lg shadow-md border-2 border-black bg-gray-200">
-          <h1 className="flex justify-center items-center font-mono text-lg sm:text-2xl font-bold pb-4 whitespace-nowrap underline">
-            Calories Burned From Exercise:
+        <div className="w-5/6 max-w-lg py-4 sm:px-32 px-16 rounded-lg shadow-md border-2 border-black bg-gray-200">
+          <h1 className="flex justify-center items-center font-mono text-md sm:text-2xl font-bold pb-4 whitespace-nowrap underline">
+            Create A Workout Below!
           </h1>
           <form
             onSubmit={handleSubmit}
             className="flex flex-col justify-center items-center font-mono text-sm sm:text-base"
           >
             <label htmlFor="name-select" className="mb-1 whitespace-nowrap">
-              Activity (Required):
+              Name (Optional):
             </label>
             <input
               type="text"
               id="name-input"
+              value={name}
               onChange={handleNameChange}
-              className="border-2 mb-2 rounded-xl px-2 border-black bg-gray-500 text-white"
-              required
-            />
-            <label htmlFor="name-select" className="mb-1 whitespace-nowrap">
-              Your Weight (Optional):
-            </label>
-            <input
-              type="text"
-              id="name-input"
-              onChange={handleTypeChange}
               className="border-2 mb-2 rounded-xl px-2 border-black bg-gray-500 text-white"
             />
 
-            <label htmlFor="name-select" className="mb-1 whitespace-nowrap">
-              Minutes Exercised (Optional):
+            <label htmlFor="type-select" className="mb-1 whitespace-nowrap">
+              Type (Optional):
             </label>
-            <input
-              type="text"
-              id="name-input"
+            <select
+              id="type-select"
+              value={type}
+              onChange={handleTypeChange}
+              className="mb-2 border-2 rounded-xl px-2 border-black bg-gray-500 text-white"
+            >
+              <option value="">All</option>
+              <option value="cardio">Cardio</option>
+              <option value="powerlifting">Powerlifting</option>
+              <option value="strength">Strength</option>
+              <option value="stretching">Stretching</option>
+              <option value="strongman">Strongman</option>
+              <option value="plyometrics">Plyometrics</option>
+              <option value="olympic_weightlifting">
+                Olympic Weightlifting
+              </option>
+            </select>
+
+            <label htmlFor="muscle-select" className="mb-1 whitespace-nowrap">
+              Muscle (Optional):
+            </label>
+            <select
+              id="muscle-select"
+              value={muscle}
               onChange={handleMuscleChange}
-              className="border-2 mb-2 rounded-xl px-2 border-black bg-gray-500 text-white"
-            />
+              className="mb-2 border-2 rounded-xl px-2 border-black bg-gray-500 text-white"
+            >
+              <option value="">All</option>
+              <option value="chest">Chest</option>
+              <option value="biceps">Biceps</option>
+              <option value="lats">Lats</option>
+              <option value="abdominals">Abdominals</option>
+              <option value="abductors">Abductors</option>
+              <option value="adductors">Adductors</option>
+              <option value="calves">Calves</option>
+              <option value="forearms">Forearms</option>
+              <option value="glutes">Glutes</option>
+              <option value="hamstrings">Hamstrings</option>
+              <option value="lower_back">Lower Back</option>
+              <option value="middle_back">Middle Back</option>
+              <option value="neck">Neck</option>
+              <option value="quadriceps">Quadriceps</option>
+              <option value="traps">Traps</option>
+              <option value="triceps">Triceps</option>
+            </select>
+
+            <label
+              htmlFor="difficulty-select"
+              className="mb-1 whitespace-nowrap"
+            >
+              Difficulty (Optional):
+            </label>
+            <select
+              id="difficulty-select"
+              value={difficulty}
+              onChange={handleDifficultyChange}
+              className="mb-2 border-2 rounded-xl px-2 border-black bg-gray-500 text-white"
+            >
+              <option value="">All</option>
+              <option value="beginner">Beginner</option>
+              <option value="intermediate">Intermediate</option>
+              <option value="expert">Expert</option>
+            </select>
 
             {/* <button
               type="submit"
-              className="my-4 hover:bg-black border-2 border-black bg-gray-700 text-white px-8 py-4 my-2 rounded-xl"
+              className="my-4 hover:bg-black border-2 border-black bg-gray-700 text-white px-8 py-4 my-2 rounded-xl "
             >
-              Fetch Activities
+              Fetch Workout
             </button> */}
-
             <button
               type="submit"
               className="my-4 mb-2 border-2 border-black bg-gray-500 text-white px-8 py-4 my-2 rounded-xl transition-all duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-110 hover:shadow-lg hover:bg-gray-800"
             >
-              Fetch Activities
+              Fetch Workout
             </button>
           </form>
         </div>
@@ -143,7 +195,7 @@ function Calories() {
     </>
   ) : isLoading ? (
     <div className="flex justify-center items-center fixed bottom-1/6 left-0 right-0 h-5/6">
-      <div role="status">
+      <div role="status" className="">
         <svg
           aria-hidden="true"
           className="w-48 h-48 text-gray-200 animate-spin dark:text-gray-600 fill-black"
@@ -170,7 +222,7 @@ function Calories() {
           className="border-2 border-black sm:text-base text-xs sm:px-8 px-4 py-2 bg-gray-500 hover:bg-black text-white m-4 font-mono rounded-lg"
           onClick={handleClick}
         >
-          Back To Search
+          New Workout
         </button>
       </div>
       {fetchedOnce === true && (
@@ -180,7 +232,7 @@ function Calories() {
               Error!
             </h1>
             <p className="text-center">
-              No activity could be found with that name. Please try again.
+              No exercises were found with your selections. Please try again.
             </p>
           </div>
         </div>
@@ -188,29 +240,28 @@ function Calories() {
     </>
   ) : (
     <>
-      <div className="bg-gradient-to-t from-gray-300 via-neutral-400 to-gray-300 pb-4">
+      <div className="pb-4 bg-gradient-to-t from-gray-300 via-neutral-400 to-gray-300">
         <div className="flex justify-end font-mono">
           <button
-            className="border-2 border-black sm:text-base text-xs sm:px-8 px-4 m-4 py-2 rounded-lg bg-gray-500 hover:bg-black text-white"
+            className="border-2 border-black sm:text-base text-xs sm:px-8 px-4 py-2 m-4 rounded-lg bg-gray-500 hover:bg-black text-white"
             onClick={handleClick}
           >
-            Back To Search
+            New Workout
           </button>
         </div>
-
+        <h1 className="text-center font-bold text-xl px-4 sm:px-0 sm:text-4xl pt-8">
+          Here is your generated workout based on your choices. Enjoy!
+        </h1>
         {workouts.length > 0 && (
           <div>
-            <h1 className="text-center font-bold text-2xl sm:text-4xl pt-8">
-              Here are the activities we found:
-            </h1>
             {workouts.map((workout) => (
-              <CalorieItem key={workout.name} calorie={workout} />
+              <Workout key={workout.name} workout={workout} />
             ))}
           </div>
         )}
       </div>
     </>
   );
-}
+};
 
-export default Calories;
+export default WorkoutForm;

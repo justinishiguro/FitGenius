@@ -1,5 +1,5 @@
 import React from "react";
-import WorkoutForm from "../Components/WorkoutForm";
+import WorkoutForm from "./WorkoutForm";
 
 const Workouts = () => {
 
