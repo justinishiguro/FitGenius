@@ -65,7 +65,7 @@ function Home() {
               </p>
               <br />
               <p className="text-center font-mono">
-                Enjoy and please find my contact on the top right of the page!
+                Enjoy and please find my contact on the top right of the page.
               </p>
             </div>
           </div>
