@@ -4,4 +4,4 @@ This is a personal project which combined my passion for programming with fitnes
 
 After submitting your choices, a workout consisting of 10 exercises is generated for you based on you inputs. Instructions on how to perform the exercise as well as any equipment that is needed is provided to you.
 
-![hello](https://imgur.com/FCzKYgN)
+![hello](https://i.imgur.com/FCzKYgN.png)
