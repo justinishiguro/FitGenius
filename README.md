@@ -2,6 +2,22 @@
 
 ![hello](https://i.imgur.com/FCzKYgN.png)
 
-This is a personal project which combined my passion for programming with fitness. The purpose of the program is to generate personalized workouts for you. You are able to select the type of exercises you wish to perform (cardio, powerlifting, etc.), which muscle group they want to target, as well as the difficulty level of each exercise. If you are searching for a specific exercise, you are able to directly input the name. 
+This is a personal project which combined my passion for programming with fitness. The purpose of the program is to generate personalized workouts for you.
 
-After submitting your choices, a workout consisting of 10 exercises is generated for you based on you inputs. Instructions on how to perform the exercise as well as any equipment that is needed is provided to you.
+
+# Create A Workout
+![hello2](https://i.imgur.com/DNFRhLF.png)
+You are able to select the type of exercises you wish to perform (cardio, powerlifting, etc.), which muscle group you want to target, as well as the difficulty level of each exercise (if you are searching for a specific exercise, you are also able to directly input the name).
+
+After submitting your choices, a workout consisting of 10 exercises is generated for you based on you inputs. Instructions on how to perform the exercise as well as any equipment that is needed is provided to you:
+
+![hello3](https://i.imgur.com/FcBYcYf.png)
+
+# Calories Burned
+
+![hello4](https://i.imgur.com/Jk1lBFt.png)
+Another feature that is available to you is a page to count how many calories you burned after performing a certain exercise. You are required to enter the activity that you performed into the form (run, swim, hockey, etc.) with the option to enter your weight and the amount of hours you performed the exercise (to provide you a more accurate result).
+
+After submitting your data, the number of calories burned from the exercise entered will be provided to you:
+
+![hello5](https://i.imgur.com/mQIFwlS.png)
